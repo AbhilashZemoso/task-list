@@ -1,18 +1,20 @@
 package com.codurance.training.tasksSolid.manager;
 
+import com.codurance.training.tasksSolid.InputHandler;
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 
-public final class TaskRunner implements Runnable {
-    private static final String QUIT = "quit";
+import static com.codurance.training.tasksSolid.commands.CommandEnum.QUIT;
 
-    private final BufferedReader in;
+public final class TaskRunner implements Runnable {
+
+    private final InputHandler inputHandler;
     private final PrintWriter out;
     private final Executor taskExecutor;
 
     public TaskRunner(BufferedReader reader, PrintWriter writer) {
-        this.in = reader;
+        this.inputHandler = new InputHandler(reader);
         this.out = writer;
         taskExecutor = new TaskExecutor(out);
     }
@@ -21,16 +23,11 @@ public final class TaskRunner implements Runnable {
         while (true) {
             out.print("> ");
             out.flush();
-            String command;
-            try {
-                command = in.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            if (command.equals(QUIT)) {
+            String commandLine = inputHandler.readNextLine();
+            if (commandLine.equalsIgnoreCase(QUIT.toString())) {
                 break;
             }
-            taskExecutor.execute(command);
+            taskExecutor.execute();
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.codurance.training.tasksSolid.commands;
 
+import com.codurance.training.tasksSolid.InputHandler;
 import com.codurance.training.tasksSolid.manager.Task;
 import com.codurance.training.tasksSolid.manager.TaskContainer;
 
@@ -12,7 +13,11 @@ public class Add {
         this.addTask = addTask;
     }
 
-    public void addTaskOrProject(String commandLine) {
+    public void processTask(){
+        addTaskOrProject(InputHandler.getArguments());
+    }
+
+    private void addTaskOrProject(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
         if (subcommand.equals("project")) {

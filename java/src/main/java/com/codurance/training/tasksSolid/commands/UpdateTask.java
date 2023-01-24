@@ -1,5 +1,6 @@
 package com.codurance.training.tasksSolid.commands;
 
+import com.codurance.training.tasksSolid.InputHandler;
 import com.codurance.training.tasksSolid.manager.Task;
 import com.codurance.training.tasksSolid.manager.TaskContainer;
 
@@ -15,12 +16,12 @@ public class UpdateTask {
         this.out = out;
     }
 
-    public void check(String idString) {
-        setDone(idString, true);
+    public void check() {
+        setDone(InputHandler.getArguments(), true);
     }
 
-    public void uncheck(String idString) {
-        setDone(idString, false);
+    public void uncheck() {
+        setDone(InputHandler.getArguments(), false);
     }
 
     private void setDone(String idString, boolean done) {

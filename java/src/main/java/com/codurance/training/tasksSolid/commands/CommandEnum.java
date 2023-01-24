@@ -6,6 +6,7 @@ public enum CommandEnum {
     CHECK,
     UNCHECK,
     HELP,
+    QUIT,
     INVALID;
 
     public static CommandEnum getCommandEnum(String command) {

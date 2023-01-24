@@ -1,5 +1,6 @@
 package com.codurance.training.tasksSolid.manager;
 
+import com.codurance.training.tasksSolid.InputHandler;
 import com.codurance.training.tasksSolid.commands.*;
 
 import java.io.PrintWriter;
@@ -22,27 +23,27 @@ public class TaskExecutor implements Executor{
         this.out = out;
     }
 
-    public void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        CommandEnum command = CommandEnum.getCommandEnum(commandRest[0]);
-        switch (command) {
+    public void execute() {
+        String command = InputHandler.getCommand();
+        CommandEnum commandEnum = CommandEnum.getCommandEnum(command);
+        switch (commandEnum) {
             case SHOW:
                 showTaskCommand.printAllTaskDetails();
                 break;
             case ADD:
-                addCommand.addTaskOrProject(commandRest[1]);
+                addCommand.processTask();
                 break;
             case CHECK:
-                updateTaskCommand.check(commandRest[1]);
+                updateTaskCommand.check();
                 break;
             case UNCHECK:
-                updateTaskCommand.uncheck(commandRest[1]);
+                updateTaskCommand.uncheck();
                 break;
             case HELP:
                 helpCommand.printAvailableCommands();
                 break;
             case INVALID:
-                error(commandRest[0]);
+                error(command);
                 break;
             default:
                 break;
