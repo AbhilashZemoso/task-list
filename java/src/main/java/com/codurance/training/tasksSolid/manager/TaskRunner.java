@@ -9,7 +9,7 @@ public final class TaskRunner implements Runnable {
 
     private final BufferedReader in;
     private final PrintWriter out;
-    private final TaskExecutor taskExecutor;
+    private final Executor taskExecutor;
 
     public TaskRunner(BufferedReader reader, PrintWriter writer) {
         this.in = reader;

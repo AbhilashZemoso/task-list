@@ -4,7 +4,7 @@ import com.codurance.training.tasksSolid.commands.*;
 
 import java.io.PrintWriter;
 
-public class TaskExecutor {
+public class TaskExecutor implements Executor{
 
     private final Add addCommand;
     private final AddTask addTaskCommand;
